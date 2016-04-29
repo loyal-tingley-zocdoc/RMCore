@@ -1,6 +1,6 @@
 //
 //  RMTableRow.swift
-//  RMUtils
+//  RMCore
 //
 //  Created by Ryan Mannion on 4/29/16.
 //  Copyright © 2016 Ryan Mannion. All rights reserved.
@@ -9,7 +9,7 @@
 import UIKit
 import Bond
 
-class RMTableRow {
+public class RMTableRow {
     var cellClass: AnyClass
     var userInfo: Any?
     var delegate: AnyObject?

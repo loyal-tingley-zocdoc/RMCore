@@ -1,6 +1,6 @@
 //
 //  UIView+Extensions.swift
-//  RMUtils
+//  RMCore
 //
 //  Created by Ryan Mannion on 4/29/16.
 //  Copyright © 2016 Ryan Mannion. All rights reserved.
