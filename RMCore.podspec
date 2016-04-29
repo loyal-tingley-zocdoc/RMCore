@@ -7,7 +7,7 @@ Pod::Spec.new do |spec|
     spec.author         = { 'Ryan Mannion' => 'rmannion@gmail.com' }
     spec.platform       = :ios, '8.0'
     spec.source         = { :git => 'https://github.com/rmannion/RMCore.git', :tag => '0.0.1' }
-    spec.source_files   = 'RMCore', 'RMCore/**/*.{h,m}'
+    spec.source_files   = 'RMCore', 'RMCore/**/*.{swift}'
     spec.exclude_files  = 'RMCore/Exclude'
 
     spec.dependency 'Bond', '~> 4.0'
