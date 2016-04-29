@@ -10,21 +10,21 @@ import UIKit
 import Bond
 
 public class RMTableRow {
-    var cellClass: AnyClass
-    var userInfo: Any?
-    var delegate: AnyObject?
-    var isSelected = Observable(false)
-    var isLastRow = false
-    var indexPath: NSIndexPath?
-    var height: CGFloat?
+    public var cellClass: AnyClass
+    public var userInfo: Any?
+    public var delegate: AnyObject?
+    public var isSelected = Observable(false)
+    public var isLastRow = false
+    public var indexPath: NSIndexPath?
+    public var height: CGFloat?
     
-    init(withClass cellClass: AnyClass = RMTableViewCell.self, userInfo: Any? = nil, delegate: AnyObject? = nil) {
+    public init(withClass cellClass: AnyClass = RMTableViewCell.self, userInfo: Any? = nil, delegate: AnyObject? = nil) {
         self.cellClass = cellClass
         self.userInfo = userInfo
         self.delegate = delegate
     }
     
-    func cellIdentifier() -> String {
+    public func cellIdentifier() -> String {
         return "cellType->\(cellClass)"
     }
 }

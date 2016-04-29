@@ -9,9 +9,9 @@
 import Foundation
 
 public class RMTableSection {
-    var rows: [RMTableRow] = []
+    public var rows: [RMTableRow] = []
     
-    init(rows: [RMTableRow] = []) {
+    public init(rows: [RMTableRow] = []) {
         self.rows = rows
     }
 }

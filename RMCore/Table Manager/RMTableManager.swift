@@ -13,10 +13,10 @@ public protocol RMTableManagerDelegate {
 }
 
 public class RMTableManager : NSObject {
-    var delegate: RMTableManagerDelegate?
+    public var delegate: RMTableManagerDelegate?
     
-    var sections = [RMTableSection]()
-    weak var tableView: UITableView? {
+    public var sections = [RMTableSection]()
+    public weak var tableView: UITableView? {
         didSet {
             if let tableView = tableView {
                 tableView.dataSource = self
@@ -29,10 +29,11 @@ public class RMTableManager : NSObject {
         }
     }
     
-    override init() {
+    public override init() {
+        super.init()
     }
     
-    func refreshIndexPaths() {
+    public func refreshIndexPaths() {
         var section = 0
         for tableSection in sections {
             var row = 0
@@ -46,13 +47,13 @@ public class RMTableManager : NSObject {
         }
     }
     
-    func rowForIndexPath(indexPath: NSIndexPath) -> RMTableRow? {
+    public func rowForIndexPath(indexPath: NSIndexPath) -> RMTableRow? {
         let tableSection = sections[indexPath.section]
         let tableRow = tableSection.rows[indexPath.row]
         return tableRow
     }
     
-    func insertRow(row: RMTableRow, atIndexPath indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)) {
+    public func insertRow(row: RMTableRow, atIndexPath indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)) {
         let section = sections[indexPath.section]
         section.rows.insert(row, atIndex: indexPath.row)
         
@@ -63,7 +64,7 @@ public class RMTableManager : NSObject {
         refreshIndexPaths()
     }
     
-    func deleteRows(rows: [RMTableRow]) {
+    public func deleteRows(rows: [RMTableRow]) {
         var indexPaths = [NSIndexPath]()
         
         for tableRow in rows {
@@ -87,7 +88,7 @@ public class RMTableManager : NSObject {
         refreshIndexPaths()
     }
     
-    func allRows() -> [RMTableRow] {
+    public func allRows() -> [RMTableRow] {
         var rows = [RMTableRow]()
         
         for tableSection in sections {
@@ -97,19 +98,19 @@ public class RMTableManager : NSObject {
         return rows
     }
     
-    func selectedRows() -> [RMTableRow] {
+    public func selectedRows() -> [RMTableRow] {
         return allRows().filter { (tableRow) -> Bool in
             return tableRow.isSelected.value
         }
     }
     
-    func unselectSelectedRows() {
+    public func unselectSelectedRows() {
         for row in selectedRows() {
             row.isSelected.value = false
         }
     }
     
-    func allIndexPaths() -> [NSIndexPath] {
+    public func allIndexPaths() -> [NSIndexPath] {
         var indexPaths = [NSIndexPath]()
         
         for tableSection in sections {
@@ -123,7 +124,7 @@ public class RMTableManager : NSObject {
         return indexPaths
     }
     
-    func deleteAllRows() {
+    public func deleteAllRows() {
         let allIndexPaths = self.allIndexPaths()
         sections = [RMTableSection()]
         

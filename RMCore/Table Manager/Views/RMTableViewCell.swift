@@ -9,7 +9,7 @@
 import UIKit
 
 public class RMTableViewCell : UITableViewCell {
-    var tableRow: RMTableRow!
+    public var tableRow: RMTableRow!
     
     required override public init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
