@@ -9,8 +9,9 @@
 import Foundation
 
 public extension CIImage {
-    public func imageWithOverlayRectangle(rectangle: CIRectangleFeature, color: UIColor = UIColor(hex: 0xfff04b)) -> CIImage {
-        var overlay = CIImage(color: color.CIColor)
+    public func imageWithOverlayRectangle(rectangle: CIRectangleFeature, color: UIColor = UIColor(hex: 0xfff04b, alpha: 0.2)) -> CIImage {
+        var overlay = CIImage(color: CIColor(CGColor: color.CGColor))
+        
         overlay = overlay.imageByCroppingToRect(extent)
         
         let parameters = ["inputExtent": CIVector(CGRect: extent),
