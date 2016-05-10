@@ -56,4 +56,10 @@ public extension UIView {
             return CGRectGetMaxX(frame)
         }
     }
+    
+    public func removeAllSubviews() {
+        for subview in subviews {
+            subview.removeFromSuperview()
+        }
+    }
 }
