@@ -10,6 +10,9 @@ import Foundation
 
 public class RMTableSection {
     public var rows: [RMTableRow] = []
+    public var headerClass: AnyClass?
+    public var headerDelegate: AnyObject?
+    public var userInfo: Any?
     
     public init(rows: [RMTableRow] = []) {
         self.rows = rows

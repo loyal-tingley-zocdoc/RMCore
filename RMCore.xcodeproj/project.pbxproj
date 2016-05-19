@@ -17,6 +17,7 @@
 		A7C2CE5E1CD52352006C5E3F /* CIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C2CE5D1CD52352006C5E3F /* CIImage+Extensions.swift */; };
 		A7C2CE6C1CD59AED006C5E3F /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C2CE6B1CD59AED006C5E3F /* UIImage+Extensions.swift */; };
 		A7C40A511CE2846D008A1C8B /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C40A501CE2846D008A1C8B /* UILabel+Extensions.swift */; };
+		A7C609AF1CED5E4600952F1F /* RMTableSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C609AE1CED5E4600952F1F /* RMTableSectionView.swift */; };
 		A7CA312B1CD3C5920085AEB1 /* RMTableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CA312A1CD3C5920085AEB1 /* RMTableManager.swift */; };
 		A7CA31341CD3C8F40085AEB1 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CA31331CD3C8F40085AEB1 /* UIColor+Extensions.swift */; };
 		A7CA31391CD3C9700085AEB1 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CA31381CD3C9700085AEB1 /* String+Extensions.swift */; };
@@ -54,6 +55,7 @@
 		A7C2CE5D1CD52352006C5E3F /* CIImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CIImage+Extensions.swift"; sourceTree = "<group>"; };
 		A7C2CE6B1CD59AED006C5E3F /* UIImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		A7C40A501CE2846D008A1C8B /* UILabel+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
+		A7C609AE1CED5E4600952F1F /* RMTableSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMTableSectionView.swift; sourceTree = "<group>"; };
 		A7CA312A1CD3C5920085AEB1 /* RMTableManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMTableManager.swift; sourceTree = "<group>"; };
 		A7CA31331CD3C8F40085AEB1 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		A7CA31381CD3C9700085AEB1 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				A7BB5E271CD362F7007BC254 /* RMTableViewCell.swift */,
+				A7C609AE1CED5E4600952F1F /* RMTableSectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7BB5E291CD362F7007BC254 /* RMTableRow.swift in Sources */,
+				A7C609AF1CED5E4600952F1F /* RMTableSectionView.swift in Sources */,
 				A7CA31391CD3C9700085AEB1 /* String+Extensions.swift in Sources */,
 				A7CA31491CD3EC320085AEB1 /* RMCollectionManager.swift in Sources */,
 				A7CA31341CD3C8F40085AEB1 /* UIColor+Extensions.swift in Sources */,

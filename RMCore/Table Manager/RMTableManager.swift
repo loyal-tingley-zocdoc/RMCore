@@ -25,6 +25,8 @@ public class RMTableManager : NSObject {
                 tableView.estimatedRowHeight = 48
                 tableView.rowHeight = UITableViewAutomaticDimension
                 tableView.backgroundColor = UIColor.clearColor()
+                tableView.estimatedSectionHeaderHeight = 25
+                tableView.sectionHeaderHeight = UITableViewAutomaticDimension
             }
         }
     }
@@ -160,6 +162,18 @@ extension RMTableManager : UITableViewDataSource {
         cell!.tableRow = tableRow
         
         return cell!
+    }
+    
+    public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var headerView: UIView?
+        
+        let tableSection = sections[section]
+        
+        if let headerClass = tableSection.headerClass as? RMTableSectionView.Type {
+            headerView = headerClass.init(tableSection: tableSection)
+        }
+        
+        return headerView
     }
 }
 
