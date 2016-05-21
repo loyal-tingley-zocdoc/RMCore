@@ -27,9 +27,13 @@ public extension String {
         return self + prefix + keyValuePairs.joinWithSeparator("&")
     }
     
-    public var phoneNumberFormat: String {
+    public var decimalString: String {
         let components = componentsSeparatedByCharactersInSet(NSCharacterSet.decimalDigitCharacterSet().invertedSet)
-        let decimalString = components.joinWithSeparator("")
+        return components.joinWithSeparator("")
+    }
+    
+    public var phoneNumberFormat: String {
+        let decimalString = self.decimalString
         
         let length = decimalString.characters.count
         
