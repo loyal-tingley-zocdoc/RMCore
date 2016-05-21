@@ -26,4 +26,46 @@ public extension String {
         
         return self + prefix + keyValuePairs.joinWithSeparator("&")
     }
+    
+    public var phoneNumberFormat: String {
+        let components = componentsSeparatedByCharactersInSet(NSCharacterSet.decimalDigitCharacterSet().invertedSet)
+        let decimalString = components.joinWithSeparator("")
+        
+        let length = decimalString.characters.count
+        
+        let hasLeadingOne = length > 0 && decimalString[decimalString.startIndex] == "1"
+        
+        if length == 0 || (length > 10 && hasLeadingOne == false) || length > 11 {
+            return decimalString
+        }
+        
+        var index = 0
+        
+        var formattedString = ""
+        
+        if hasLeadingOne {
+            formattedString += "1 "
+            index += 1
+        }
+        
+        if length - index > 3 {
+            let range = decimalString.startIndex.advancedBy(index)..<decimalString.startIndex.advancedBy(index + 3)
+            let areaCode = decimalString[range]
+            formattedString += "(" + areaCode + ") "
+            index += 3
+        }
+        
+        if length - index > 3 {
+            let range = decimalString.startIndex.advancedBy(index)..<decimalString.startIndex.advancedBy(index + 3)
+            let prefix = decimalString[range]
+            formattedString += prefix + "-"
+            index += 3
+        }
+        
+        let range = decimalString.startIndex.advancedBy(index)..<decimalString.endIndex
+        let remainder = decimalString[range]
+        formattedString += remainder
+        
+        return formattedString
+    }
 }
