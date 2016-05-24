@@ -15,7 +15,12 @@ public protocol RMTableManagerDelegate {
 public class RMTableManager : NSObject {
     public var delegate: RMTableManagerDelegate?
     
-    public var sections = [RMTableSection]()
+    public var sections = [RMTableSection]() {
+        didSet {
+            refreshIndexPaths()
+        }
+    }
+    
     public weak var tableView: UITableView? {
         didSet {
             if let tableView = tableView {
@@ -39,6 +44,8 @@ public class RMTableManager : NSObject {
         var section = 0
         for tableSection in sections {
             var row = 0
+            tableSection.section = section
+            
             for tableRow in tableSection.rows {
                 tableRow.indexPath = NSIndexPath(forRow: row, inSection: section)
                 tableRow.isLastRow = false
@@ -170,7 +177,7 @@ extension RMTableManager : UITableViewDataSource {
         let tableSection = sections[section]
         
         if let headerClass = tableSection.headerClass as? RMTableSectionView.Type {
-            headerView = headerClass.init(tableSection: tableSection)
+            headerView = headerClass.init(tableSection: tableSection, delegate: tableSection.headerDelegate)
         }
         
         return headerView

@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Bond
 
 public class RMTableViewCell : UITableViewCell {
     public var tableRow: RMTableRow!
+    internal var observers = [DisposableType]()
     
     required override public init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -19,5 +21,17 @@ public class RMTableViewCell : UITableViewCell {
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    internal func flushObservers() {
+        observers.forEach { $0.dispose() }
+        observers.removeAll()
+    }
+    
+    internal func observe<T>(observable: Observable<T>, observe: T -> Void) {
+        let observer = observable.observe { (value) in
+            observe(value)
+        }
+        observers.append(observer)
     }
 }

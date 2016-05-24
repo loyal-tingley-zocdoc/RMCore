@@ -18,7 +18,7 @@ public class RMTableRow {
     public var indexPath: NSIndexPath?
     public var height: CGFloat?
     
-    public init(withClass cellClass: AnyClass = RMTableViewCell.self, userInfo: Any? = nil, delegate: AnyObject? = nil) {
+    public init(cellClass: AnyClass = RMTableViewCell.self, userInfo: Any? = nil, delegate: AnyObject? = nil) {
         self.cellClass = cellClass
         self.userInfo = userInfo
         self.delegate = delegate

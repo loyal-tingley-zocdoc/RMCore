@@ -7,12 +7,15 @@
 //
 
 import Foundation
+import Bond
 
 public class RMTableSection {
     public var rows: [RMTableRow] = []
     public var headerClass: AnyClass?
-    public var headerDelegate: AnyObject?
+    public var headerDelegate: RMTableSectionViewDelegate?
     public var userInfo: Any?
+    public var closed: Observable<Bool> = Observable(false)
+    public var section: Int = 0
     
     public init(rows: [RMTableRow] = []) {
         self.rows = rows
