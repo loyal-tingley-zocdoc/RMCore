@@ -34,4 +34,11 @@ public class RMTableViewCell : UITableViewCell {
         }
         observers.append(observer)
     }
+    
+    internal func observeNew<T>(observable: Observable<T>, observe: T -> Void) {
+        let observer = observable.observeNew { (value) in
+            observe(value)
+        }
+        observers.append(observer)
+    }
 }

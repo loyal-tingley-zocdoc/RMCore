@@ -10,6 +10,9 @@ import Foundation
 
 public class RMCollectionSection {
     public var rows: [RMCollectionRow] = []
+    public var headerClass: AnyClass?
+    public var headerHeight: CGFloat = 0
+    public var userInfo: Any?
     
     public init(rows: [RMCollectionRow] = []) {
         self.rows = rows

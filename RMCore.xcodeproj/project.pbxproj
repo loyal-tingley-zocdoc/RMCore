@@ -25,6 +25,7 @@
 		A7CA31451CD3EB420085AEB1 /* RMCollectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CA31441CD3EB420085AEB1 /* RMCollectionRow.swift */; };
 		A7CA31471CD3EB8C0085AEB1 /* RMCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CA31461CD3EB8C0085AEB1 /* RMCollectionViewCell.swift */; };
 		A7CA31491CD3EC320085AEB1 /* RMCollectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CA31481CD3EC320085AEB1 /* RMCollectionManager.swift */; };
+		A7DDA3091CFB57D300A92F50 /* RMCollectionSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DDA3081CFB57D300A92F50 /* RMCollectionSectionView.swift */; };
 		BE33F9774ADE166B68884376 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C71DBAE9A58A694A13D1ABC /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		A7CA31441CD3EB420085AEB1 /* RMCollectionRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMCollectionRow.swift; sourceTree = "<group>"; };
 		A7CA31461CD3EB8C0085AEB1 /* RMCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMCollectionViewCell.swift; sourceTree = "<group>"; };
 		A7CA31481CD3EC320085AEB1 /* RMCollectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMCollectionManager.swift; sourceTree = "<group>"; };
+		A7DDA3081CFB57D300A92F50 /* RMCollectionSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMCollectionSectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				A7CA31461CD3EB8C0085AEB1 /* RMCollectionViewCell.swift */,
+				A7DDA3081CFB57D300A92F50 /* RMCollectionSectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				A7BB5E291CD362F7007BC254 /* RMTableRow.swift in Sources */,
 				A7C609AF1CED5E4600952F1F /* RMTableSectionView.swift in Sources */,
 				A7CA31391CD3C9700085AEB1 /* String+Extensions.swift in Sources */,
+				A7DDA3091CFB57D300A92F50 /* RMCollectionSectionView.swift in Sources */,
 				A7CA31491CD3EC320085AEB1 /* RMCollectionManager.swift in Sources */,
 				A7CA31341CD3C8F40085AEB1 /* UIColor+Extensions.swift in Sources */,
 				A7CA31471CD3EB8C0085AEB1 /* RMCollectionViewCell.swift in Sources */,

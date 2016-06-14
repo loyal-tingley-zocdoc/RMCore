@@ -27,6 +27,10 @@ public extension String {
         return self + prefix + keyValuePairs.joinWithSeparator("&")
     }
     
+    public var stringByTrimmingWhitespace:String {
+        return stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    }
+    
     public var decimalString: String {
         let components = componentsSeparatedByCharactersInSet(NSCharacterSet.decimalDigitCharacterSet().invertedSet)
         return components.joinWithSeparator("")

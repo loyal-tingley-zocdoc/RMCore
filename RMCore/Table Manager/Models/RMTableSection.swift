@@ -20,4 +20,8 @@ public class RMTableSection {
     public init(rows: [RMTableRow] = []) {
         self.rows = rows
     }
+    
+    public var selectedRows: [RMTableRow] {
+        return rows.filter { $0.isSelected.value }
+    }
 }
