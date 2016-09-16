@@ -62,4 +62,8 @@ public extension UIView {
             subview.removeFromSuperview()
         }
     }
+    
+    public func optionalSnapshotViewAfterScreenUpdates(afterUpdates: Bool = false) -> UIView? {
+        return snapshotViewAfterScreenUpdates(afterUpdates)
+    }
 }
