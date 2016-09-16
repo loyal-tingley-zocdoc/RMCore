@@ -16,15 +16,18 @@ public extension UIColor {
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
     
-    public func image() -> UIImage {
+    public func image() -> UIImage? {
         UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
         
-        let context = UIGraphicsGetCurrentContext()
-        CGContextSetFillColorWithColor(context, CGColor)
-        CGContextFillRect(context, CGRect(x: 0, y: 0, width: 1, height: 1))
+        if let context = UIGraphicsGetCurrentContext() {
+            CGContextSetFillColorWithColor(context, CGColor)
+            CGContextFillRect(context, CGRect(x: 0, y: 0, width: 1, height: 1))
+            
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return image
+        }
         
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
+        return nil
     }
 }
