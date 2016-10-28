@@ -13,8 +13,8 @@ public protocol RMTableSectionViewDelegate {
 }
 
 public class RMTableSectionView : UIView {
-    var tableSection: RMTableSection
-    var delegate: RMTableSectionViewDelegate?
+    public var tableSection: RMTableSection
+    public var delegate: RMTableSectionViewDelegate?
     
     required public init(tableSection: RMTableSection, delegate: RMTableSectionViewDelegate? = nil) {
         self.tableSection = tableSection

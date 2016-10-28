@@ -30,8 +30,6 @@ public class RMTableManager : NSObject {
                 tableView.estimatedRowHeight = 48
                 tableView.rowHeight = UITableViewAutomaticDimension
                 tableView.backgroundColor = UIColor.clearColor()
-                tableView.estimatedSectionHeaderHeight = 25
-                tableView.sectionHeaderHeight = UITableViewAutomaticDimension
             }
         }
     }
@@ -171,6 +169,11 @@ extension RMTableManager : UITableViewDataSource {
         return cell!
     }
     
+    public func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let tableSection = sections[section]
+        return tableSection.headerHeight
+    }
+
     public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var headerView: UIView?
         

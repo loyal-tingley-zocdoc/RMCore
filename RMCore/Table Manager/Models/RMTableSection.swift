@@ -16,7 +16,8 @@ public class RMTableSection {
     public var userInfo: Any?
     public var closed: Observable<Bool> = Observable(false)
     public var section: Int = 0
-    
+    public var headerHeight: CGFloat = 0
+
     public init(rows: [RMTableRow] = []) {
         self.rows = rows
     }
