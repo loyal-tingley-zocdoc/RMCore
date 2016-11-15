@@ -23,19 +23,19 @@ public class RMTableViewCell : UITableViewCell {
         super.init(coder: aDecoder)
     }
     
-    internal func flushObservers() {
+    public func flushObservers() {
         observers.forEach { $0.dispose() }
         observers.removeAll()
     }
     
-    internal func observe<T>(observable: Observable<T>, observe: T -> Void) {
+    public func observe<T>(observable: Observable<T>, observe: T -> Void) {
         let observer = observable.observe { (value) in
             observe(value)
         }
         observers.append(observer)
     }
     
-    internal func observeNew<T>(observable: Observable<T>, observe: T -> Void) {
+    public func observeNew<T>(observable: Observable<T>, observe: T -> Void) {
         let observer = observable.observeNew { (value) in
             observe(value)
         }
