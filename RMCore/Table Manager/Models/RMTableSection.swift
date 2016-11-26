@@ -13,6 +13,7 @@ public class RMTableSection {
     public var rows: [RMTableRow] = []
     public var headerClass: AnyClass?
     public var headerDelegate: RMTableSectionViewDelegate?
+    public var headerText: String?
     public var headerHeight: CGFloat = 0
     public var footerClass: AnyClass?
     public var footerHeight: CGFloat = 0
