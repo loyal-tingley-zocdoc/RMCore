@@ -10,6 +10,9 @@ import Foundation
 
 public protocol RMTableManagerDelegate {
     func tableManager(tableManager: RMTableManager, didSelectTableRow tableRow: RMTableRow)
+    func tableManager(tableManager: RMTableManager, shouldDeleteTableRow tableRow: RMTableRow) -> Bool
+    func tableManager(tableManager: RMTableManager, didDeleteTableRow tableRow: RMTableRow)
+    func tableManager(tableManager: RMTableManager, didMoveTableRow tableRow: RMTableRow, fromIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath)
 }
 
 public class RMTableManager : NSObject {
@@ -30,6 +33,8 @@ public class RMTableManager : NSObject {
                 tableView.estimatedRowHeight = 48
                 tableView.rowHeight = UITableViewAutomaticDimension
                 tableView.backgroundColor = UIColor.clearColor()
+                tableView.estimatedSectionHeaderHeight = 0
+                tableView.sectionHeaderHeight = UITableViewAutomaticDimension
             }
         }
     }
@@ -41,9 +46,9 @@ public class RMTableManager : NSObject {
     public func refreshIndexPaths() {
         var section = 0
         for tableSection in sections {
-            var row = 0
             tableSection.section = section
             
+            var row = 0
             for tableRow in tableSection.rows {
                 tableRow.indexPath = NSIndexPath(forRow: row, inSection: section)
                 tableRow.isLastRow = false
@@ -150,7 +155,7 @@ extension RMTableManager : UITableViewDataSource {
     
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let tableSection = sections[section]
-        return tableSection.rows.count
+        return tableSection.closed.value ? 0 : tableSection.rows.count
     }
     
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -169,10 +174,11 @@ extension RMTableManager : UITableViewDataSource {
         return cell!
     }
     
-    public func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return sections[section].headerHeight
+    public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let tableSection = sections[section]
+        return tableSection.headerText
     }
-
+    
     public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var headerView: UIView?
         
@@ -185,20 +191,63 @@ extension RMTableManager : UITableViewDataSource {
         return headerView
     }
     
-    public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return sections[section].footerHeight
-    }
-    
-    public func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        var footerView: UIView?
+    public func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        var canEdit = false
         
-        let tableSection = sections[section]
-        
-        if let footerClass = tableSection.footerClass as? RMTableSectionView.Type {
-            footerView = footerClass.init(tableSection: tableSection, delegate: tableSection.headerDelegate)
+        if let tableRow = rowForIndexPath(indexPath) {
+            canEdit = tableRow.editable || tableRow.deletable
         }
         
-        return footerView
+        return canEdit
+    }
+    
+    public func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        var canMove = false
+        
+        if let tableRow = rowForIndexPath(indexPath) {
+            canMove = tableRow.editable
+        }
+        
+        return canMove
+    }
+    
+    public func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if let tableRow = rowForIndexPath(indexPath) {
+            let tableSection = sections[indexPath.section]
+            
+            if delegate?.tableManager(self, shouldDeleteTableRow: tableRow) ?? false {
+                tableSection.rows.removeAtIndex(indexPath.row)
+                
+                tableView.beginUpdates()
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                tableView.endUpdates()
+                
+                delegate?.tableManager(self, didDeleteTableRow: tableRow)
+            }
+        }
+    }
+    
+    public func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        if let tableRow = rowForIndexPath(sourceIndexPath) {
+            let sourceTableSection = sections[sourceIndexPath.section]
+            sourceTableSection.rows.removeAtIndex(sourceIndexPath.row)
+            
+            let destinationTableSection = sections[destinationIndexPath.section]
+            destinationTableSection.rows.insert(tableRow, atIndex: destinationIndexPath.row)
+            
+            delegate?.tableManager(self, didMoveTableRow: tableRow, fromIndexPath: sourceIndexPath, toIndexPath: destinationIndexPath)
+        }
+    }
+    
+    public func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+        let indexTitles = sections.reduce([String]()) {
+            if let indexTitle = $1.indexTitle {
+                return $0 + [indexTitle]
+            } else {
+                return $0
+            }
+        }
+        return indexTitles
     }
 }
 
