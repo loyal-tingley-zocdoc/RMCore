@@ -179,6 +179,11 @@ extension RMTableManager : UITableViewDataSource {
         return tableSection.headerText
     }
     
+    public func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let tableSection = sections[section]
+        return tableSection.headerHeight
+    }
+    
     public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var headerView: UIView?
         
@@ -189,6 +194,23 @@ extension RMTableManager : UITableViewDataSource {
         }
         
         return headerView
+    }
+    
+    public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        let tableSection = sections[section]
+        return tableSection.footerHeight
+    }
+    
+    public func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        var footerView: UIView?
+        
+        let tableSection = sections[section]
+        
+        if let footerClass = tableSection.footerClass as? RMTableSectionView.Type {
+            footerView = footerClass.init(tableSection: tableSection, delegate: tableSection.headerDelegate)
+        }
+        
+        return footerView
     }
     
     public func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

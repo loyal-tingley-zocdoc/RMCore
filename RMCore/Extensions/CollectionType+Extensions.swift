@@ -8,10 +8,16 @@
 
 import Foundation
 
-public struct RMGroup<ObjectType> {
+public class RMGroup<ObjectType> {
     public let groupObject: Any?
     public let name: String?
     public var objects: [ObjectType]
+    
+    public init(groupObject: Any?, name: String?) {
+        self.groupObject = groupObject
+        self.name = name
+        self.objects = [ObjectType]()
+    }
 }
 
 public extension CollectionType {
@@ -27,8 +33,8 @@ public extension CollectionType {
     
     public func toGroups<GroupObjectType where GroupObjectType: Any>(
         groupObjectExtractor groupObjectExtractor: Generator.Element -> GroupObjectType,
-        groupObjectKeyExtractor: GroupObjectType -> String?,
-        groupObjectNameExtractor: (GroupObjectType -> String?)? = nil) -> [RMGroup<Generator.Element>] {
+                             groupObjectKeyExtractor: GroupObjectType -> String?,
+                             groupObjectNameExtractor: (GroupObjectType -> String?)? = nil) -> [RMGroup<Generator.Element>] {
         var groupsByGroupObjectKey = [String : RMGroup<Generator.Element>]()
         var groups = [RMGroup<Generator.Element>]()
         for object in self {
@@ -37,9 +43,11 @@ public extension CollectionType {
             var group = groupsByGroupObjectKey[groupObjectKey]
             if group == nil {
                 let groupObjectName = groupObjectNameExtractor?(groupObject)
-                group = RMGroup<Generator.Element>(groupObject: groupObject, name: groupObjectName ?? groupObjectKey, objects: [])
+                group = RMGroup<Generator.Element>(groupObject: groupObject, name: groupObjectName ?? groupObjectKey)
                 groupsByGroupObjectKey[groupObjectKey] = group
-                groups.append(group!)
+                if let group = group {
+                    groups.append(group)
+                }
             }
             group?.objects.append(object)
         }
