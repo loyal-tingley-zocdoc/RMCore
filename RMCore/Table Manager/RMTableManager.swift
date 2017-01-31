@@ -24,6 +24,8 @@ public class RMTableManager : NSObject {
         }
     }
     
+    public var sectionIndexOffset = 0
+
     public weak var tableView: UITableView? {
         didSet {
             if let tableView = tableView {
@@ -270,6 +272,10 @@ extension RMTableManager : UITableViewDataSource {
             }
         }
         return indexTitles
+    }
+
+    public func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+        return index + sectionIndexOffset
     }
 }
 
