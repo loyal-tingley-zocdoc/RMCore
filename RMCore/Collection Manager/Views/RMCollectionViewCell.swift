@@ -8,10 +8,11 @@
 
 import Foundation
 import Bond
+import ReactiveKit
 
 public class RMCollectionViewCell : UICollectionViewCell {
     public var collectionRow: RMCollectionRow!
-    internal var observers = [DisposableType]()
+    internal var observers = [Disposable]()
     
     public required override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,14 +28,14 @@ public class RMCollectionViewCell : UICollectionViewCell {
     }
 
     public func observe<T>(observable: Observable<T>, observe: @escaping (T) -> Void) {
-        let observer = observable.observe { (value) in
+        let observer = observable.observeNext { (value) in
             observe(value)
         }
         observers.append(observer)
     }
     
     public func observeNew<T>(observable: Observable<T>, observe: @escaping (T) -> Void) {
-        let observer = observable.observeNew { (value) in
+        let observer = observable.skip(first: 1).observeNext { (value) in
             observe(value)
         }
         observers.append(observer)

@@ -31,10 +31,10 @@ public extension Collection {
         return dictionary
     }
     
-    public func toGroups<GroupObjectType where GroupObjectType: Any>(
-        groupObjectExtractor groupObjectExtractor: (Generator.Element) -> GroupObjectType,
-                             groupObjectKeyExtractor: (GroupObjectType) -> String?,
-                             groupObjectNameExtractor: ((GroupObjectType) -> String?)? = nil) -> [RMGroup<Generator.Element>] {
+    public func toGroups<GroupObjectType> (
+        groupObjectExtractor: (Generator.Element) -> GroupObjectType,
+        groupObjectKeyExtractor: (GroupObjectType) -> String?,
+        groupObjectNameExtractor: ((GroupObjectType) -> String?)? = nil) -> [RMGroup<Generator.Element>] where GroupObjectType: Any {
         var groupsByGroupObjectKey = [String : RMGroup<Generator.Element>]()
         var groups = [RMGroup<Generator.Element>]()
         for object in self {

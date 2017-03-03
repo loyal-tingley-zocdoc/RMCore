@@ -8,10 +8,11 @@
 
 import UIKit
 import Bond
+import ReactiveKit
 
 public class RMTableViewCell : UITableViewCell {
     public var tableRow: RMTableRow!
-    internal var observers = [DisposableType]()
+    internal var observers = [Disposable]()
     
     required override public init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -29,16 +30,16 @@ public class RMTableViewCell : UITableViewCell {
     }
     
     public func observe<T>(observable: Observable<T>, observe: @escaping (T) -> Void) {
-        let observer = observable.observe { (value) in
+        let observer = observable.observeNext { (value) in
             observe(value)
         }
         observers.append(observer)
     }
     
     public func observeNew<T>(observable: Observable<T>, observe: @escaping (T) -> Void) {
-        let observer = observable.observeNew { (value) in
+        let observer = observable.skip(first: 1).observeNext(with: { (value) in
             observe(value)
-        }
+        })
         observers.append(observer)
     }
 }
