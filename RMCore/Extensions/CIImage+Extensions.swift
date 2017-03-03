@@ -9,65 +9,65 @@
 import Foundation
 
 public extension CIImage {
-    public func imageWithOverlayRectangle(rectangle: CIRectangleFeature, color: UIColor = UIColor(hex: 0xfff04b, alpha: 0.2)) -> CIImage {
-        var overlay = CIImage(color: CIColor(CGColor: color.CGColor))
+    public func overlay(rectangle: CIRectangleFeature, color: UIColor = UIColor(hex: 0xfff04b, alpha: 0.2)) -> CIImage {
+        var overlay = CIImage(color: CIColor(cgColor: color.cgColor))
         
-        overlay = overlay.imageByCroppingToRect(extent)
+        overlay = overlay.cropping(to: extent)
         
-        let parameters = ["inputExtent": CIVector(CGRect: extent),
-                          "inputTopLeft": CIVector(CGPoint: rectangle.topLeft),
-                          "inputTopRight": CIVector(CGPoint: rectangle.topRight),
-                          "inputBottomLeft": CIVector(CGPoint: rectangle.bottomLeft),
-                          "inputBottomRight": CIVector(CGPoint: rectangle.bottomRight)]
+        let parameters: [String: Any] = ["inputExtent": CIVector(cgRect: extent),
+                                         "inputTopLeft": CIVector(cgPoint: rectangle.topLeft),
+                                         "inputTopRight": CIVector(cgPoint: rectangle.topRight),
+                                         "inputBottomLeft": CIVector(cgPoint: rectangle.bottomLeft),
+                                         "inputBottomRight": CIVector(cgPoint: rectangle.bottomRight)]
         
-        overlay = overlay.imageByApplyingFilter("CIPerspectiveTransformWithExtent", withInputParameters: parameters)
+        overlay = overlay.applyingFilter("CIPerspectiveTransformWithExtent", withInputParameters: parameters)
         
-        return overlay.imageByCompositingOverImage(self)
+        return overlay.compositingOverImage(self)
     }
     
-    public func imageWithContrastFilter(contrast: Float = 1.1) -> CIImage? {
-        let parameters = ["inputContrast": contrast,
-                          kCIInputImageKey: self]
+    public func constrastFilter(contrast: Float = 1.1) -> CIImage? {
+        let parameters: [String: Any] = ["inputContrast": contrast,
+                                         kCIInputImageKey: self]
         
         let filter = CIFilter(name: "CIColorControls", withInputParameters: parameters)
         
         return filter?.outputImage
     }
     
-    public func imageWithBlackWhiteFilter(contrast: Float = 1.14, brightness: Float = 0, saturation: Float = 0) -> CIImage? {
+    public func blackWhiteFilter(contrast: Float = 1.14, brightness: Float = 0, saturation: Float = 0) -> CIImage? {
 
-        let parameters = ["inputContrast": contrast,
-                          "inputBrightness": brightness,
-                          "inputSaturation": saturation,
-                          kCIInputImageKey: self]
+        let parameters: [String: Any] = ["inputContrast": contrast,
+                                         "inputBrightness": brightness,
+                                         "inputSaturation": saturation,
+                                         kCIInputImageKey: self]
         
         let filter = CIFilter(name: "CIColorControls", withInputParameters: parameters)
         
         return filter?.outputImage
     }
     
-    public func imageWithPerspectiveCorrectedForRectangle(rectangle: CIRectangleFeature) -> CIImage {
-        let parameters = ["inputTopLeft": CIVector(CGPoint: rectangle.topLeft),
-                          "inputTopRight": CIVector(CGPoint: rectangle.topRight),
-                          "inputBottomLeft": CIVector(CGPoint: rectangle.bottomLeft),
-                          "inputBottomRight": CIVector(CGPoint: rectangle.bottomRight)]
+    public func perspectiveCorrected(for rectangle: CIRectangleFeature) -> CIImage {
+        let parameters: [String: Any] = ["inputTopLeft": CIVector(cgPoint: rectangle.topLeft),
+                                         "inputTopRight": CIVector(cgPoint: rectangle.topRight),
+                                         "inputBottomLeft": CIVector(cgPoint: rectangle.bottomLeft),
+                                         "inputBottomRight": CIVector(cgPoint: rectangle.bottomRight)]
         
-        return imageByApplyingFilter("CIPerspectiveCorrection", withInputParameters: parameters)
+        return applyingFilter("CIPerspectiveCorrection", withInputParameters: parameters)
     }
     
-    public func imageWithScaleFilter(scale: Float) -> CIImage? {
-        let parameters = ["inputScale": scale,
-                          "inputAspectRatio": 1.0,
-                          kCIInputImageKey: self]
+    public func scaleFilter(scale: Float) -> CIImage? {
+        let parameters: [String: Any] = ["inputScale": scale,
+                                         "inputAspectRatio": 1.0,
+                                         kCIInputImageKey: self]
         
         let filter = CIFilter(name: "CILanczosScaleTransform", withInputParameters: parameters)
         
         return filter?.outputImage
     }
     
-    public func imageWithExposureAdjustmentFilter(exposure: Float) -> CIImage? {
-        let parameters = ["inputEV": exposure,
-                          kCIInputImageKey: self]
+    public func exposureAdjustmentFilter(exposure: Float) -> CIImage? {
+        let parameters: [String: Any] = ["inputEV": exposure,
+                                         kCIInputImageKey: self]
         
         let filter = CIFilter(name: "CIExposureAdjust", withInputParameters: parameters)
         

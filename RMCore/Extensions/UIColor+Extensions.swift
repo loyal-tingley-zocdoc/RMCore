@@ -20,8 +20,8 @@ public extension UIColor {
         UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
         
         if let context = UIGraphicsGetCurrentContext() {
-            CGContextSetFillColorWithColor(context, CGColor)
-            CGContextFillRect(context, CGRect(x: 0, y: 0, width: 1, height: 1))
+            context.setFillColor(cgColor)
+            context.fill(CGRect(x: 0, y: 0, width: 1, height: 1))
             
             let image = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()

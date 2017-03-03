@@ -20,7 +20,7 @@ public class RMCollectionManager : NSObject {
             if let collectionView = collectionView {
                 collectionView.dataSource = self
                 collectionView.delegate = self
-                collectionView.backgroundColor = UIColor.clearColor()
+                collectionView.backgroundColor = UIColor.clear
             }
         }
     }
@@ -30,7 +30,7 @@ public class RMCollectionManager : NSObject {
         super.init()
     }
     
-    public func rowForIndexPath(indexPath: NSIndexPath) -> RMCollectionRow? {
+    public func rowForIndexPath(indexPath: IndexPath) -> RMCollectionRow? {
         let section = sections[indexPath.section]
         let row = section.rows[indexPath.row]
         return row
@@ -42,21 +42,21 @@ public class RMCollectionManager : NSObject {
         
         for section in sections {
             for row in section.rows {
-                cellClasses.addObject(row.cellClass)
+                cellClasses.add(row.cellClass)
             }
             if let headerClass = section.headerClass {
-                headerClasses.addObject(headerClass)
+                headerClasses.add(headerClass)
             }
         }
         
         for obj in cellClasses {
             let cellClass: AnyClass = obj as! AnyClass
-            collectionView?.registerClass(cellClass, forCellWithReuseIdentifier: "cellType->\(cellClass)")
+            collectionView?.register(cellClass, forCellWithReuseIdentifier: "cellType->\(cellClass)")
         }
         
         for obj in headerClasses {
             let headerClass: AnyClass = obj as! AnyClass
-            collectionView?.registerClass(headerClass, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "cellType->\(headerClass)")
+            collectionView?.register(headerClass, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "cellType->\(headerClass)")
         }
     }
     
@@ -88,19 +88,19 @@ extension RMCollectionManager : UICollectionViewDataSource {
         return sections.count
     }
     
-    public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let section = sections[section];
         return section.rows.count
     }
     
-    public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let row = rowForIndexPath(indexPath)!
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let row = rowForIndexPath(indexPath: indexPath)!
         let identifier = row.cellIdentifier()
         
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as? RMCollectionViewCell
+        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? RMCollectionViewCell
         if (cell == nil) {
             let cellClass = row.cellClass as! RMCollectionViewCell.Type
-            cell = cellClass.init(frame: CGRectZero)
+            cell = cellClass.init(frame: .zero)
         }
         
         row.indexPath = indexPath
@@ -109,7 +109,7 @@ extension RMCollectionManager : UICollectionViewDataSource {
         return cell!
     }
     
-    public func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         var reusableView: UICollectionReusableView?
         
         if kind == UICollectionElementKindSectionHeader {
@@ -117,7 +117,7 @@ extension RMCollectionManager : UICollectionViewDataSource {
             if section.headerClass != nil {
                 let headerClass = section.headerClass as! RMCollectionSectionView.Type
                 let reuseIdentifier = "cellType->\(headerClass)"
-                let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: reuseIdentifier, forIndexPath: indexPath) as! RMCollectionSectionView
+                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseIdentifier, for: indexPath) as! RMCollectionSectionView
                 headerView.collectionSection = section
                 reusableView = headerView
             }
@@ -128,7 +128,7 @@ extension RMCollectionManager : UICollectionViewDataSource {
     
     public func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let section = sections[section]
-        var size = CGSizeZero
+        var size: CGSize = .zero
         
         if section.headerHeight > 0 {
             size = CGSize(width: collectionView.width, height: section.headerHeight)
@@ -139,9 +139,9 @@ extension RMCollectionManager : UICollectionViewDataSource {
 }
 
 extension RMCollectionManager : UICollectionViewDelegate {
-    public func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let collectionRow = rowForIndexPath(indexPath) {
-            delegate?.collectionManager(self, didSelectCollectionRow: collectionRow)
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let collectionRow = rowForIndexPath(indexPath: indexPath) {
+            delegate?.collectionManager(collectionManager: self, didSelectCollectionRow: collectionRow)
         }
     }
 }

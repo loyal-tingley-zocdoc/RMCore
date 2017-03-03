@@ -10,7 +10,7 @@ import Foundation
 
 public extension UILabel {
     public convenience init(font: UIFont, textColor: UIColor) {
-        self.init(frame: CGRectZero)
+        self.init(frame: .zero)
         
         self.font = font
         self.textColor = textColor
@@ -18,6 +18,6 @@ public extension UILabel {
     
     public func enableMultiline() {
         numberOfLines = 0
-        lineBreakMode = .ByWordWrapping
+        lineBreakMode = .byWordWrapping
     }
 }

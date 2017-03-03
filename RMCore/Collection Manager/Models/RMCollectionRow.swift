@@ -15,7 +15,7 @@ public class RMCollectionRow {
     public var delegate: AnyObject?
     public var isSelected = Observable(false)
     public var isLastRow = false
-    public var indexPath: NSIndexPath?
+    public var indexPath: IndexPath?
     public var height: CGFloat?
     
     public init(withClass cellClass: AnyClass = RMTableViewCell.self, userInfo: Any? = nil, delegate: AnyObject? = nil) {

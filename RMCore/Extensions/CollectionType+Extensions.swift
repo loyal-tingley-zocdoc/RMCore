@@ -20,11 +20,11 @@ public class RMGroup<ObjectType> {
     }
 }
 
-public extension CollectionType {
-    public func toDictionary<KeyType, ValueType> (transform:(element: Self.Generator.Element) -> (key: KeyType, value: ValueType)?) -> [KeyType : ValueType] {
+public extension Collection {
+    public func toDictionary<KeyType, ValueType> (transform:(_ element: Self.Iterator.Element) -> (key: KeyType, value: ValueType)?) -> [KeyType : ValueType] {
         var dictionary = [KeyType : ValueType]()
         for element in self {
-            if let (key, value) = transform(element: element) {
+            if let (key, value) = transform(element) {
                 dictionary[key] = value
             }
         }
@@ -32,9 +32,9 @@ public extension CollectionType {
     }
     
     public func toGroups<GroupObjectType where GroupObjectType: Any>(
-        groupObjectExtractor groupObjectExtractor: Generator.Element -> GroupObjectType,
-                             groupObjectKeyExtractor: GroupObjectType -> String?,
-                             groupObjectNameExtractor: (GroupObjectType -> String?)? = nil) -> [RMGroup<Generator.Element>] {
+        groupObjectExtractor groupObjectExtractor: (Generator.Element) -> GroupObjectType,
+                             groupObjectKeyExtractor: (GroupObjectType) -> String?,
+                             groupObjectNameExtractor: ((GroupObjectType) -> String?)? = nil) -> [RMGroup<Generator.Element>] {
         var groupsByGroupObjectKey = [String : RMGroup<Generator.Element>]()
         var groups = [RMGroup<Generator.Element>]()
         for object in self {

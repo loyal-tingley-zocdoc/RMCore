@@ -47,13 +47,13 @@ public extension UIView {
     
     public var bottomY: CGFloat {
         get {
-            return CGRectGetMaxY(frame)
+            return frame.maxY
         }
     }
     
     public var rightX: CGFloat {
         get{
-            return CGRectGetMaxX(frame)
+            return frame.maxX
         }
     }
     
@@ -64,6 +64,6 @@ public extension UIView {
     }
     
     public func optionalSnapshotViewAfterScreenUpdates(afterUpdates: Bool = false) -> UIView? {
-        return snapshotViewAfterScreenUpdates(afterUpdates)
+        return snapshotView(afterScreenUpdates: afterUpdates)
     }
 }

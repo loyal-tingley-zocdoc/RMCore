@@ -20,7 +20,7 @@ public class RMTableSectionView : UIView {
         self.tableSection = tableSection
         self.delegate = delegate
         
-        super.init(frame: CGRectZero)
+        super.init(frame: .zero)
     }
     
     required public init?(coder aDecoder: NSCoder) {

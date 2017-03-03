@@ -16,7 +16,7 @@ public class RMTableViewCell : UITableViewCell {
     required override public init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        selectionStyle = .None
+        selectionStyle = .none
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -28,14 +28,14 @@ public class RMTableViewCell : UITableViewCell {
         observers.removeAll()
     }
     
-    public func observe<T>(observable: Observable<T>, observe: T -> Void) {
+    public func observe<T>(observable: Observable<T>, observe: @escaping (T) -> Void) {
         let observer = observable.observe { (value) in
             observe(value)
         }
         observers.append(observer)
     }
     
-    public func observeNew<T>(observable: Observable<T>, observe: T -> Void) {
+    public func observeNew<T>(observable: Observable<T>, observe: @escaping (T) -> Void) {
         let observer = observable.observeNew { (value) in
             observe(value)
         }

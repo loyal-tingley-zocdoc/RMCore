@@ -15,7 +15,7 @@ public class RMTableRow {
     public var delegate: AnyObject?
     public var isSelected = Observable(false)
     public var isLastRow = false
-    public var indexPath: NSIndexPath?
+    public var indexPath: IndexPath?
     public var height: CGFloat?
     public var editable = false
     public var deletable = false

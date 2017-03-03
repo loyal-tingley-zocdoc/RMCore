@@ -26,14 +26,14 @@ public class RMCollectionViewCell : UICollectionViewCell {
         observers.removeAll()
     }
 
-    public func observe<T>(observable: Observable<T>, observe: T -> Void) {
+    public func observe<T>(observable: Observable<T>, observe: @escaping (T) -> Void) {
         let observer = observable.observe { (value) in
             observe(value)
         }
         observers.append(observer)
     }
     
-    public func observeNew<T>(observable: Observable<T>, observe: T -> Void) {
+    public func observeNew<T>(observable: Observable<T>, observe: @escaping (T) -> Void) {
         let observer = observable.observeNew { (value) in
             observe(value)
         }

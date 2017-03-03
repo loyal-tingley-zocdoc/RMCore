@@ -14,26 +14,25 @@ public extension String {
     }
 
     public func urlEncoded() -> String {
-        return self.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
+        return self.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
     }
     
-    public func stringByAppendingQueryParameters(queryParameters: [String: AnyObject]) -> String {
+    public func appending(queryParameters: [String: AnyObject]) -> String {
         let keyValuePairs = queryParameters.map { (key, value) -> String in
             return "\(key.urlEncoded())=\(value.description.urlEncoded())"
         }
         
-        let prefix = containsString("?") ? "&" : "?"
+        let prefix = contains("?") ? "&" : "?"
         
-        return self + prefix + keyValuePairs.joinWithSeparator("&")
+        return self + prefix + keyValuePairs.joined(separator: "&")
     }
     
-    public var stringByTrimmingWhitespace:String {
-        return stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    public var trimmingWhitespace : String {
+        return trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     public var decimalString: String {
-        let components = componentsSeparatedByCharactersInSet(NSCharacterSet.decimalDigitCharacterSet().invertedSet)
-        return components.joinWithSeparator("")
+        return components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
     }
     
     public var phoneNumberFormat: String {
@@ -57,20 +56,20 @@ public extension String {
         }
         
         if length - index > 3 {
-            let range = decimalString.startIndex.advancedBy(index)..<decimalString.startIndex.advancedBy(index + 3)
+            let range = decimalString.index(startIndex, offsetBy: index)..<decimalString.index(startIndex, offsetBy: index + 3)
             let areaCode = decimalString[range]
             formattedString += "(" + areaCode + ") "
             index += 3
         }
         
         if length - index > 3 {
-            let range = decimalString.startIndex.advancedBy(index)..<decimalString.startIndex.advancedBy(index + 3)
+            let range = decimalString.index(startIndex, offsetBy: index)..<decimalString.index(startIndex, offsetBy: index + 3)
             let prefix = decimalString[range]
             formattedString += prefix + "-"
             index += 3
         }
         
-        let range = decimalString.startIndex.advancedBy(index)..<decimalString.endIndex
+        let range = decimalString.index(startIndex, offsetBy: index)..<decimalString.endIndex
         let remainder = decimalString[range]
         formattedString += remainder
         
