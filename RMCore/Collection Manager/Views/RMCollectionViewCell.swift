@@ -11,7 +11,7 @@ import Bond
 import ReactiveKit
 
 public class RMCollectionViewCell : UICollectionViewCell {
-    public var collectionRow: RMCollectionRow!
+    open var collectionRow: RMCollectionRow?
     internal var observers = [Disposable]()
     
     public required override init(frame: CGRect) {

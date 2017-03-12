@@ -151,12 +151,15 @@ public class RMTableManager : NSObject {
 }
 
 extension RMTableManager : UITableViewDataSource {
-    public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    public func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let tableSection = sections[section]
+        guard let tableSection = sections[safe: section] else {
+            return 0
+        }
+        
         return tableSection.closed.value ? 0 : tableSection.rows.count
     }
     
@@ -181,7 +184,7 @@ extension RMTableManager : UITableViewDataSource {
         return tableSection.headerText
     }
     
-    public func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         let tableSection = sections[section]
         return tableSection.headerHeight
     }
@@ -199,7 +202,10 @@ extension RMTableManager : UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let tableSection = sections[section]
+        guard let tableSection = sections[safe: section] else {
+            return 0
+        }
+        
         return tableSection.footerHeight
     }
 

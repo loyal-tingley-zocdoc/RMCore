@@ -10,8 +10,8 @@ import UIKit
 import Bond
 import ReactiveKit
 
-public class RMTableViewCell : UITableViewCell {
-    public var tableRow: RMTableRow!
+open class RMTableViewCell : UITableViewCell {
+    open var tableRow: RMTableRow?
     internal var observers = [Disposable]()
     
     required override public init(style: UITableViewCellStyle, reuseIdentifier: String?) {

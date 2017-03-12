@@ -9,7 +9,7 @@
 import Foundation
 
 public class RMCollectionSectionView : UICollectionReusableView {
-    public var collectionSection: RMCollectionSection!
+    open var collectionSection: RMCollectionSection?
 
     public required override init(frame: CGRect) {
         super.init(frame: frame)

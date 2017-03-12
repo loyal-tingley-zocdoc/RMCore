@@ -12,7 +12,7 @@ public protocol RMTableSectionViewDelegate {
     func tableSectionView(tableSectionView: RMTableSectionView, tappedWithTableSection tableSection: RMTableSection)
 }
 
-public class RMTableSectionView : UIView {
+open class RMTableSectionView : UIView {
     public var tableSection: RMTableSection
     public var delegate: RMTableSectionViewDelegate?
     

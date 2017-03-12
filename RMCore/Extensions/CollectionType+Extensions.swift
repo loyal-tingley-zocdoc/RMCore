@@ -8,12 +8,12 @@
 
 import Foundation
 
-public class RMGroup<ObjectType> {
-    public let groupObject: Any?
+public class RMGroup<ObjectType, GroupObjectType> {
+    public let groupObject: GroupObjectType?
     public let name: String?
     public var objects: [ObjectType]
     
-    public init(groupObject: Any?, name: String?) {
+    public init(groupObject: GroupObjectType?, name: String?) {
         self.groupObject = groupObject
         self.name = name
         self.objects = [ObjectType]()
@@ -34,16 +34,16 @@ public extension Collection {
     public func toGroups<GroupObjectType> (
         groupObjectExtractor: (Generator.Element) -> GroupObjectType,
         groupObjectKeyExtractor: (GroupObjectType) -> String?,
-        groupObjectNameExtractor: ((GroupObjectType) -> String?)? = nil) -> [RMGroup<Generator.Element>] where GroupObjectType: Any {
-        var groupsByGroupObjectKey = [String : RMGroup<Generator.Element>]()
-        var groups = [RMGroup<Generator.Element>]()
+        groupObjectNameExtractor: ((GroupObjectType) -> String?)? = nil) -> [RMGroup<Generator.Element, GroupObjectType>] where GroupObjectType: Any {
+        var groupsByGroupObjectKey = [String : RMGroup<Generator.Element, GroupObjectType>]()
+        var groups = [RMGroup<Generator.Element, GroupObjectType>]()
         for object in self {
             let groupObject = groupObjectExtractor(object)
             let groupObjectKey = groupObjectKeyExtractor(groupObject) ?? ""
             var group = groupsByGroupObjectKey[groupObjectKey]
             if group == nil {
                 let groupObjectName = groupObjectNameExtractor?(groupObject)
-                group = RMGroup<Generator.Element>(groupObject: groupObject, name: groupObjectName ?? groupObjectKey)
+                group = RMGroup<Generator.Element, GroupObjectType>(groupObject: groupObject, name: groupObjectName ?? groupObjectKey)
                 groupsByGroupObjectKey[groupObjectKey] = group
                 if let group = group {
                     groups.append(group)
@@ -53,5 +53,11 @@ public extension Collection {
         }
         
         return groups
+    }
+}
+
+public extension Collection where Indices.Iterator.Element == Index {
+    public subscript (safe index: Index) -> Generator.Element? {
+        return indices.contains(index) ? self[index] : nil
     }
 }
