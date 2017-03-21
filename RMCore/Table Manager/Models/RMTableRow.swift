@@ -19,6 +19,7 @@ public class RMTableRow {
     public var height: CGFloat?
     public var editable = false
     public var deletable = false
+    public var editActions: [UITableViewRowAction]?
 
     public init(cellClass: AnyClass = RMTableViewCell.self, userInfo: Any? = nil, delegate: AnyObject? = nil) {
         self.cellClass = cellClass

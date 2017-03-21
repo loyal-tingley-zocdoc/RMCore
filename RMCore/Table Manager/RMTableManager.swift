@@ -206,7 +206,7 @@ extension RMTableManager : UITableViewDataSource {
             return 0
         }
         
-        return tableSection.footerHeight
+        return tableSection.headerHeight
     }
 
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -225,7 +225,7 @@ extension RMTableManager : UITableViewDataSource {
         var canEdit = false
         
         if let tableRow = row(for: indexPath) {
-            canEdit = tableRow.editable || tableRow.deletable
+            canEdit = tableRow.editable || tableRow.deletable || (tableRow.editActions?.count ?? 0) > 0
         }
         
         return canEdit
@@ -282,6 +282,13 @@ extension RMTableManager : UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         return index + sectionIndexOffset
+    }
+    
+    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        if let tableRow = row(for: indexPath) {
+            return tableRow.editActions
+        }
+        return nil
     }
 }
 
