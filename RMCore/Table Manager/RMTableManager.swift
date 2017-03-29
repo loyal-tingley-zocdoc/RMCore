@@ -79,7 +79,8 @@ public class RMTableManager : NSObject {
     }
     
     public func deleteRows(rows: [RMTableRow]) {
-        var indexPaths = [IndexPath]()
+        var deletedIndexPaths = [IndexPath]()
+        var deletedSections = IndexSet()
         
         for tableRow in rows {
             if let indexPath = tableRow.indexPath {
@@ -87,15 +88,26 @@ public class RMTableManager : NSObject {
                 if let index = tableSection.rows.index(where: { (aTableRow) -> Bool in
                     aTableRow === tableRow
                 }) {
-                    indexPaths.append(indexPath)
+                    deletedIndexPaths.append(indexPath)
                     tableSection.rows.remove(at: index)
+                    
+                    if tableSection.rows.count == 0 {
+                        deletedSections.insert(tableSection.section)
+                    }
                 }
             }
         }
         
+        sections = sections.filter({ (tableSection) -> Bool in
+            deletedSections.contains(tableSection.section) == false
+        })
+        
         if let aTableView = tableView {
             aTableView.beginUpdates()
-            aTableView.deleteRows(at: indexPaths, with: .automatic)
+            aTableView.deleteRows(at: deletedIndexPaths, with: .automatic)
+            if deletedSections.count > 0 {
+                aTableView.deleteSections(deletedSections, with: .automatic)
+            }
             aTableView.endUpdates()
         }
         
@@ -184,21 +196,24 @@ extension RMTableManager : UITableViewDataSource {
         return tableSection.headerText
     }
     
-    public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-        let tableSection = sections[section]
-        return tableSection.headerHeight
-    }
-    
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var headerView: UIView?
-        
-        let tableSection = sections[section]
-        
-        if let headerClass = tableSection.headerClass as? RMTableSectionView.Type {
-            headerView = headerClass.init(tableSection: tableSection, delegate: tableSection.headerDelegate)
+        guard let tableSection = sections[safe: section] else {
+            return nil
         }
         
-        return headerView
+        if let headerClass = tableSection.headerClass as? RMTableSectionView.Type {
+            return headerClass.init(tableSection: tableSection, delegate: tableSection.headerDelegate)
+        }
+        
+        return nil
+    }
+    
+    public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        guard let tableSection = sections[safe: section] else {
+            return 0
+        }
+        
+        return tableSection.headerHeight
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -210,15 +225,32 @@ extension RMTableManager : UITableViewDataSource {
     }
 
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        var footerView: UIView?
-        
-        let tableSection = sections[section]
-        
-        if let footerClass = tableSection.footerClass as? RMTableSectionView.Type {
-            footerView = footerClass.init(tableSection: tableSection, delegate: tableSection.headerDelegate)
+        guard let tableSection = sections[safe: section] else {
+            return nil
         }
         
-        return footerView
+        if let footerClass = tableSection.footerClass as? RMTableSectionView.Type {
+            return footerClass.init(tableSection: tableSection, delegate: tableSection.headerDelegate)
+        }
+        
+        return nil
+    }
+    
+    public func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+        guard let tableSection = sections[safe: section] else {
+            return 0
+        }
+        
+        return tableSection.footerHeight
+    }
+
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        guard let tableSection = sections[safe: section] else {
+            return 0
+            
+        }
+        
+        return tableSection.footerHeight
     }
 
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
