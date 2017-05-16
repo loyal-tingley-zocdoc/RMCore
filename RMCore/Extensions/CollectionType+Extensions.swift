@@ -9,11 +9,11 @@
 import Foundation
 
 public class RMGroup<ObjectType, GroupObjectType> {
-    public let groupObject: GroupObjectType?
+    public let groupObject: GroupObjectType
     public let name: String?
     public var objects: [ObjectType]
     
-    public init(groupObject: GroupObjectType?, name: String?) {
+    public init(groupObject: GroupObjectType, name: String?) {
         self.groupObject = groupObject
         self.name = name
         self.objects = [ObjectType]()
