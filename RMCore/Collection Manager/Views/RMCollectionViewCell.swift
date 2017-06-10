@@ -10,7 +10,7 @@ import Foundation
 import Bond
 import ReactiveKit
 
-public class RMCollectionViewCell : UICollectionViewCell {
+open class RMCollectionViewCell : UICollectionViewCell {
     open var collectionRow: RMCollectionRow?
     internal var observers = [Disposable]()
     
