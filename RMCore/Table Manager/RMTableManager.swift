@@ -201,7 +201,7 @@ extension RMTableManager : UITableViewDataSource {
             return nil
         }
         
-        if let headerClass = tableSection.headerClass as? RMTableSectionView.Type {
+        if let headerClass = tableSection.headerClass {
             return headerClass.init(tableSection: tableSection, delegate: tableSection.headerDelegate)
         }
         
@@ -229,7 +229,7 @@ extension RMTableManager : UITableViewDataSource {
             return nil
         }
         
-        if let footerClass = tableSection.footerClass as? RMTableSectionView.Type {
+        if let footerClass = tableSection.footerClass {
             return footerClass.init(tableSection: tableSection, delegate: tableSection.headerDelegate)
         }
         

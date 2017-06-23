@@ -10,7 +10,7 @@ import UIKit
 import Bond
 
 public class RMTableRow {
-    public var cellClass: AnyClass
+    public var cellClass: RMTableViewCell.Type
     public var userInfo: Any?
     public var delegate: AnyObject?
     public var isSelected = Observable(false)
@@ -21,7 +21,7 @@ public class RMTableRow {
     public var deletable = false
     public var editActions: [UITableViewRowAction]?
 
-    public init(cellClass: AnyClass = RMTableViewCell.self, userInfo: Any? = nil, delegate: AnyObject? = nil) {
+    public init(cellClass: RMTableViewCell.Type = RMTableViewCell.self, userInfo: Any? = nil, delegate: AnyObject? = nil) {
         self.cellClass = cellClass
         self.userInfo = userInfo
         self.delegate = delegate
