@@ -181,8 +181,7 @@ extension RMTableManager : UITableViewDataSource {
         
         var cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? RMTableViewCell
         if (cell == nil) {
-            let tableCellClass = tableRow.cellClass as! RMTableViewCell.Type
-            cell = tableCellClass.init(style: .default, reuseIdentifier: identifier)
+            cell = tableRow.cellClass.init(style: .default, reuseIdentifier: identifier)
         }
         
         tableRow.indexPath = indexPath
