@@ -302,14 +302,7 @@ extension RMTableManager : UITableViewDataSource {
     }
     
     public func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        let indexTitles = sections.reduce([String]()) {
-            if let indexTitle = $1.indexTitle {
-                return $0 + [indexTitle]
-            } else {
-                return $0
-            }
-        }
-        return indexTitles
+        return sections.flatMap { $0.indexTitle }
     }
 
     public func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
