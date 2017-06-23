@@ -179,15 +179,14 @@ extension RMTableManager : UITableViewDataSource {
         let tableRow = row(for: indexPath)!
         let identifier = tableRow.cellIdentifier()
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? RMTableViewCell
-        if (cell == nil) {
-            cell = tableRow.cellClass.init(style: .default, reuseIdentifier: identifier)
-        }
-        
+        let cell =
+            tableView.dequeueReusableCell(withIdentifier: identifier) as? RMTableViewCell
+            ?? tableRow.cellClass.init(style: .default, reuseIdentifier: identifier)
+
         tableRow.indexPath = indexPath
-        cell!.tableRow = tableRow
+        cell.tableRow = tableRow
         
-        return cell!
+        return cell
     }
     
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
