@@ -115,13 +115,9 @@ public class RMTableManager : NSObject {
     }
     
     public func allRows() -> [RMTableRow] {
-        var rows = [RMTableRow]()
-        
-        for tableSection in sections {
-            rows += tableSection.rows
+        return sections.flatMap { (section) in
+            return section.rows
         }
-        
-        return rows
     }
     
     public func selectedRows() -> [RMTableRow] {
@@ -137,17 +133,9 @@ public class RMTableManager : NSObject {
     }
     
     public func allIndexPaths() -> [IndexPath] {
-        var indexPaths = [IndexPath]()
-        
-        for tableSection in sections {
-            for tableRow in tableSection.rows {
-                if let indexPath = tableRow.indexPath {
-                    indexPaths.append(indexPath)
-                }
-            }
+        return allRows().flatMap { (row) in
+            row.indexPath
         }
-        
-        return indexPaths
     }
     
     public func deleteAllRows() {
