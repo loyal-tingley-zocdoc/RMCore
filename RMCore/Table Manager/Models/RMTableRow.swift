@@ -12,7 +12,7 @@ import Bond
 public class RMTableRow {
     public var cellClass: RMTableViewCell.Type
     public var userInfo: Any?
-    public var delegate: AnyObject?
+    public weak var delegate: AnyObject?
     public var isSelected = Observable(false)
     public var isLastRow = false
     public var indexPath: IndexPath?
@@ -25,6 +25,10 @@ public class RMTableRow {
         self.cellClass = cellClass
         self.userInfo = userInfo
         self.delegate = delegate
+    }
+
+    public convenience init<T>(cellClass: RMTypedTableViewCell<T>.Type, userInfo: T? = nil, delegate: AnyObject? = nil) {
+        self.init(cellClass: cellClass, userInfo: userInfo, delegate: delegate)
     }
     
     public func cellIdentifier() -> String {
