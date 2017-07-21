@@ -54,6 +54,13 @@ public extension Collection {
         
         return groups
     }
+    
+    public var soleItem: Iterator.Element? {
+        if count == 1 {
+            return first
+        }
+        return nil
+    }
 }
 
 public extension Collection where Indices.Iterator.Element == Index {

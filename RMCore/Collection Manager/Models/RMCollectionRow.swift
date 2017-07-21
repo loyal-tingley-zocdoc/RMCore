@@ -10,7 +10,7 @@ import Foundation
 import Bond
 
 public class RMCollectionRow {
-    public var cellClass: AnyClass
+    public var cellClass: RMCollectionViewCell.Type
     public var userInfo: Any?
     public var delegate: AnyObject?
     public var isSelected = Observable(false)
@@ -18,7 +18,7 @@ public class RMCollectionRow {
     public var indexPath: IndexPath?
     public var height: CGFloat?
     
-    public init(withClass cellClass: AnyClass = RMTableViewCell.self, userInfo: Any? = nil, delegate: AnyObject? = nil) {
+    public init(withClass cellClass: RMCollectionViewCell.Type = RMCollectionViewCell.self, userInfo: Any? = nil, delegate: AnyObject? = nil) {
         self.cellClass = cellClass
         self.userInfo = userInfo
         self.delegate = delegate

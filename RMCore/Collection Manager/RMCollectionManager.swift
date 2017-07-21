@@ -99,7 +99,7 @@ extension RMCollectionManager : UICollectionViewDataSource {
         
         var cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? RMCollectionViewCell
         if (cell == nil) {
-            let cellClass = row.cellClass as! RMCollectionViewCell.Type
+            let cellClass = row.cellClass
             cell = cellClass.init(frame: .zero)
         }
         

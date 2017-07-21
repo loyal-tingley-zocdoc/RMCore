@@ -115,13 +115,9 @@ public class RMTableManager : NSObject {
     }
     
     public func allRows() -> [RMTableRow] {
-        var rows = [RMTableRow]()
-        
-        for tableSection in sections {
-            rows += tableSection.rows
+        return sections.flatMap { (section) in
+            return section.rows
         }
-        
-        return rows
     }
     
     public func selectedRows() -> [RMTableRow] {
@@ -137,17 +133,9 @@ public class RMTableManager : NSObject {
     }
     
     public func allIndexPaths() -> [IndexPath] {
-        var indexPaths = [IndexPath]()
-        
-        for tableSection in sections {
-            for tableRow in tableSection.rows {
-                if let indexPath = tableRow.indexPath {
-                    indexPaths.append(indexPath)
-                }
-            }
+        return allRows().flatMap { (row) in
+            row.indexPath
         }
-        
-        return indexPaths
     }
     
     public func deleteAllRows() {
@@ -179,16 +167,14 @@ extension RMTableManager : UITableViewDataSource {
         let tableRow = row(for: indexPath)!
         let identifier = tableRow.cellIdentifier()
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? RMTableViewCell
-        if (cell == nil) {
-            let tableCellClass = tableRow.cellClass as! RMTableViewCell.Type
-            cell = tableCellClass.init(style: .default, reuseIdentifier: identifier)
-        }
-        
+        let cell =
+            tableView.dequeueReusableCell(withIdentifier: identifier) as? RMTableViewCell
+            ?? tableRow.cellClass.init(style: .default, reuseIdentifier: identifier)
+
         tableRow.indexPath = indexPath
-        cell!.tableRow = tableRow
+        cell.tableRow = tableRow
         
-        return cell!
+        return cell
     }
     
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -201,7 +187,7 @@ extension RMTableManager : UITableViewDataSource {
             return nil
         }
         
-        if let headerClass = tableSection.headerClass as? RMTableSectionView.Type {
+        if let headerClass = tableSection.headerClass {
             return headerClass.init(tableSection: tableSection, delegate: tableSection.headerDelegate)
         }
         
@@ -229,7 +215,7 @@ extension RMTableManager : UITableViewDataSource {
             return nil
         }
         
-        if let footerClass = tableSection.footerClass as? RMTableSectionView.Type {
+        if let footerClass = tableSection.footerClass {
             return footerClass.init(tableSection: tableSection, delegate: tableSection.headerDelegate)
         }
         
@@ -302,14 +288,7 @@ extension RMTableManager : UITableViewDataSource {
     }
     
     public func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        let indexTitles = sections.reduce([String]()) {
-            if let indexTitle = $1.indexTitle {
-                return $0 + [indexTitle]
-            } else {
-                return $0
-            }
-        }
-        return indexTitles
+        return sections.flatMap { $0.indexTitle }
     }
 
     public func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
