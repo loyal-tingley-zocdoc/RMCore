@@ -29,17 +29,14 @@ open class RMTableViewCell : UITableViewCell {
         observers.removeAll()
     }
     
-    public func observe<T>(observable: Observable<T>, observe: @escaping (T) -> Void) {
+    public func observe<T: SignalProtocol>(observable: T, observe: @escaping (T.Element) -> Void) {
         let observer = observable.observeNext { (value) in
             observe(value)
         }
         observers.append(observer)
     }
     
-    public func observeNew<T>(observable: Observable<T>, observe: @escaping (T) -> Void) {
-        let observer = observable.skip(first: 1).observeNext(with: { (value) in
-            observe(value)
-        })
-        observers.append(observer)
+    public func observeNew<T: SignalProtocol>(observable: T, observe: @escaping (T.Element) -> Void) {
+        self.observe(observable: observable.skip(first: 1), observe: observe)
     }
 }
