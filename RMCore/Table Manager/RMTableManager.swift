@@ -294,12 +294,10 @@ extension RMTableManager : UITableViewDataSource {
     public func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         return index + sectionIndexOffset
     }
-    
-    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        if let tableRow = row(for: indexPath) {
-            return tableRow.editActions
-        }
-        return nil
+
+    @objc(__workaroundTableView:editActionsForRowAtIndexPath:)
+    public func __workaroundTableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        return row(for: indexPath)?.editActions
     }
 }
 
