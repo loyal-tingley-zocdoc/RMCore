@@ -28,6 +28,7 @@
 		A7CA31471CD3EB8C0085AEB1 /* RMCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CA31461CD3EB8C0085AEB1 /* RMCollectionViewCell.swift */; };
 		A7CA31491CD3EC320085AEB1 /* RMCollectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CA31481CD3EC320085AEB1 /* RMCollectionManager.swift */; };
 		A7DDA3091CFB57D300A92F50 /* RMCollectionSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DDA3081CFB57D300A92F50 /* RMCollectionSectionView.swift */; };
+		C20C522D1F2295C800DC3393 /* RMTableManager+Workaround.m in Sources */ = {isa = PBXBuildFile; fileRef = C20C522B1F2295C800DC3393 /* RMTableManager+Workaround.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		A7CA31481CD3EC320085AEB1 /* RMCollectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMCollectionManager.swift; sourceTree = "<group>"; };
 		A7DDA3081CFB57D300A92F50 /* RMCollectionSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMCollectionSectionView.swift; sourceTree = "<group>"; };
 		C05C78E65C8ED782AC03CB9D /* Pods-BasePods-RMCore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasePods-RMCore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BasePods-RMCore/Pods-BasePods-RMCore.debug.xcconfig"; sourceTree = "<group>"; };
+		C20C522B1F2295C800DC3393 /* RMTableManager+Workaround.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RMTableManager+Workaround.m"; sourceTree = "<group>"; };
 		EBBA3CB844D4CCE0158C9010 /* Pods-BasePods-RMCore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasePods-RMCore.release.xcconfig"; path = "Pods/Target Support Files/Pods-BasePods-RMCore/Pods-BasePods-RMCore.release.xcconfig"; sourceTree = "<group>"; };
 		F0F75D6529A8FBED391CD867 /* Pods_BasePods_RMCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BasePods_RMCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -169,6 +171,7 @@
 				A7BB5E231CD362F7007BC254 /* Models */,
 				A7BB5E261CD362F7007BC254 /* Views */,
 				A7CA312A1CD3C5920085AEB1 /* RMTableManager.swift */,
+				C20C522B1F2295C800DC3393 /* RMTableManager+Workaround.m */,
 			);
 			path = "Table Manager";
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				A7CA31491CD3EC320085AEB1 /* RMCollectionManager.swift in Sources */,
 				A7CA31341CD3C8F40085AEB1 /* UIColor+Extensions.swift in Sources */,
 				A7CA31471CD3EB8C0085AEB1 /* RMCollectionViewCell.swift in Sources */,
+				C20C522D1F2295C800DC3393 /* RMTableManager+Workaround.m in Sources */,
 				A7CA312B1CD3C5920085AEB1 /* RMTableManager.swift in Sources */,
 				A7C40A511CE2846D008A1C8B /* UILabel+Extensions.swift in Sources */,
 				A7CA31421CD3EA7D0085AEB1 /* RMCollectionSection.swift in Sources */,
