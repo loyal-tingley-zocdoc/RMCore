@@ -34,25 +34,24 @@ public extension Collection {
     public func toGroups<GroupObjectType> (
         groupObjectExtractor: (Generator.Element) -> GroupObjectType,
         groupObjectKeyExtractor: (GroupObjectType) -> String?,
-        groupObjectNameExtractor: ((GroupObjectType) -> String?)? = nil) -> [RMGroup<Generator.Element, GroupObjectType>] where GroupObjectType: Any {
+        groupObjectNameExtractor: ((GroupObjectType) -> String?)? = nil)
+        -> [RMGroup<Generator.Element, GroupObjectType>]
+    {
         var groupsByGroupObjectKey = [String : RMGroup<Generator.Element, GroupObjectType>]()
-        var groups = [RMGroup<Generator.Element, GroupObjectType>]()
+
         for object in self {
             let groupObject = groupObjectExtractor(object)
+
             let groupObjectKey = groupObjectKeyExtractor(groupObject) ?? ""
-            var group = groupsByGroupObjectKey[groupObjectKey]
-            if group == nil {
+
+            let group = groupsByGroupObjectKey.findOrCreate(at: groupObjectKey) {
                 let groupObjectName = groupObjectNameExtractor?(groupObject)
-                group = RMGroup<Generator.Element, GroupObjectType>(groupObject: groupObject, name: groupObjectName ?? groupObjectKey)
-                groupsByGroupObjectKey[groupObjectKey] = group
-                if let group = group {
-                    groups.append(group)
-                }
+                return RMGroup<Generator.Element, GroupObjectType>(groupObject: groupObject, name: groupObjectName ?? groupObjectKey)
             }
-            group?.objects.append(object)
+            group.objects.append(object)
         }
         
-        return groups
+        return Array(groupsByGroupObjectKey.values)
     }
     
     public var soleItem: Iterator.Element? {
