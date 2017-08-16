@@ -97,16 +97,13 @@ extension RMCollectionManager : UICollectionViewDataSource {
         let row = rowForIndexPath(indexPath: indexPath)!
         let identifier = row.cellIdentifier()
         
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? RMCollectionViewCell
-        if (cell == nil) {
-            let cellClass = row.cellClass
-            cell = cellClass.init(frame: .zero)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
+        if let cell = cell as? RMCollectionViewCell {
+            row.indexPath = indexPath
+            cell.collectionRow = row
         }
-        
-        row.indexPath = indexPath
-        cell!.collectionRow = row
-        
-        return cell!
+
+        return cell
     }
     
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -114,8 +111,7 @@ extension RMCollectionManager : UICollectionViewDataSource {
         
         if kind == UICollectionElementKindSectionHeader {
             let section = sections[indexPath.section]
-            if section.headerClass != nil {
-                let headerClass = section.headerClass as! RMCollectionSectionView.Type
+            if let headerClass = section.headerClass {
                 let reuseIdentifier = "cellType->\(headerClass)"
                 let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseIdentifier, for: indexPath) as! RMCollectionSectionView
                 headerView.collectionSection = section

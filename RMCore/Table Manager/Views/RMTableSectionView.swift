@@ -8,13 +8,13 @@
 
 import UIKit
 
-public protocol RMTableSectionViewDelegate {
+public protocol RMTableSectionViewDelegate: class {
     func tableSectionView(tableSectionView: RMTableSectionView, tappedWithTableSection tableSection: RMTableSection)
 }
 
 open class RMTableSectionView : UIView {
     public var tableSection: RMTableSection
-    public var delegate: RMTableSectionViewDelegate?
+    public weak var delegate: RMTableSectionViewDelegate?
     
     required public init(tableSection: RMTableSection, delegate: RMTableSectionViewDelegate? = nil) {
         self.tableSection = tableSection

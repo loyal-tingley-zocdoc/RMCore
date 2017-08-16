@@ -12,7 +12,7 @@ import Bond
 public class RMTableSection {
     public var rows: [RMTableRow] = []
     public var headerClass: RMTableSectionView.Type?
-    public var headerDelegate: RMTableSectionViewDelegate?
+    public weak var headerDelegate: RMTableSectionViewDelegate?
     public var headerText: String?
     public var headerHeight: CGFloat = 0
     public var footerClass: RMTableSectionView.Type?
