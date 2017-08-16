@@ -28,6 +28,6 @@ public class RMTableRow {
     }
     
     public func cellIdentifier() -> String {
-        return "cellType->\(cellClass)"
+        return cellClass.implicitReuseIdentifier
     }
 }

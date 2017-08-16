@@ -25,6 +25,6 @@ public class RMCollectionRow {
     }
     
     public func cellIdentifier() -> String {
-        return "cellType->\(cellClass)"
+        return cellClass.implicitReuseIdentifier
     }
 }

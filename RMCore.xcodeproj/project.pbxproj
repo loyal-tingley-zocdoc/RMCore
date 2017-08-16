@@ -28,6 +28,8 @@
 		A7CA31471CD3EB8C0085AEB1 /* RMCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CA31461CD3EB8C0085AEB1 /* RMCollectionViewCell.swift */; };
 		A7CA31491CD3EC320085AEB1 /* RMCollectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CA31481CD3EC320085AEB1 /* RMCollectionManager.swift */; };
 		A7DDA3091CFB57D300A92F50 /* RMCollectionSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7DDA3081CFB57D300A92F50 /* RMCollectionSectionView.swift */; };
+		C26AD1EE1F44B1A300D1F2BD /* HasReuseIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26AD1ED1F44B1A300D1F2BD /* HasReuseIdentifier.swift */; };
+		C26AD1F01F44B28500D1F2BD /* HashableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26AD1EF1F44B28500D1F2BD /* HashableType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,8 @@
 		A7CA31481CD3EC320085AEB1 /* RMCollectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMCollectionManager.swift; sourceTree = "<group>"; };
 		A7DDA3081CFB57D300A92F50 /* RMCollectionSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMCollectionSectionView.swift; sourceTree = "<group>"; };
 		C05C78E65C8ED782AC03CB9D /* Pods-BasePods-RMCore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasePods-RMCore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BasePods-RMCore/Pods-BasePods-RMCore.debug.xcconfig"; sourceTree = "<group>"; };
+		C26AD1ED1F44B1A300D1F2BD /* HasReuseIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HasReuseIdentifier.swift; sourceTree = "<group>"; };
+		C26AD1EF1F44B28500D1F2BD /* HashableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashableType.swift; sourceTree = "<group>"; };
 		EBBA3CB844D4CCE0158C9010 /* Pods-BasePods-RMCore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasePods-RMCore.release.xcconfig"; path = "Pods/Target Support Files/Pods-BasePods-RMCore/Pods-BasePods-RMCore.release.xcconfig"; sourceTree = "<group>"; };
 		F0F75D6529A8FBED391CD867 /* Pods_BasePods_RMCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BasePods_RMCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -131,6 +135,7 @@
 		A7BB5E081CD36275007BC254 /* RMCore */ = {
 			isa = PBXGroup;
 			children = (
+				C26AD1EC1F44B17500D1F2BD /* Helpers */,
 				A7BB5E201CD362F7007BC254 /* Extensions */,
 				A7CA313E1CD3EA730085AEB1 /* Collection Manager */,
 				A7BB5E221CD362F7007BC254 /* Table Manager */,
@@ -217,6 +222,15 @@
 				A7DDA3081CFB57D300A92F50 /* RMCollectionSectionView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		C26AD1EC1F44B17500D1F2BD /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C26AD1ED1F44B1A300D1F2BD /* HasReuseIdentifier.swift */,
+				C26AD1EF1F44B28500D1F2BD /* HashableType.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -365,6 +379,7 @@
 				A7BB5E291CD362F7007BC254 /* RMTableRow.swift in Sources */,
 				A7C609AF1CED5E4600952F1F /* RMTableSectionView.swift in Sources */,
 				A7CA31391CD3C9700085AEB1 /* String+Extensions.swift in Sources */,
+				C26AD1F01F44B28500D1F2BD /* HashableType.swift in Sources */,
 				A7DDA3091CFB57D300A92F50 /* RMCollectionSectionView.swift in Sources */,
 				A7CA31491CD3EC320085AEB1 /* RMCollectionManager.swift in Sources */,
 				A7CA31341CD3C8F40085AEB1 /* UIColor+Extensions.swift in Sources */,
@@ -374,6 +389,7 @@
 				A7CA31421CD3EA7D0085AEB1 /* RMCollectionSection.swift in Sources */,
 				A7BB5E2A1CD362F7007BC254 /* RMTableSection.swift in Sources */,
 				A7CA31451CD3EB420085AEB1 /* RMCollectionRow.swift in Sources */,
+				C26AD1EE1F44B1A300D1F2BD /* HasReuseIdentifier.swift in Sources */,
 				A7C2CE5E1CD52352006C5E3F /* CIImage+Extensions.swift in Sources */,
 				A7C2CE6C1CD59AED006C5E3F /* UIImage+Extensions.swift in Sources */,
 				A764DE791E395723001541E8 /* CollectionType+Extensions.swift in Sources */,
